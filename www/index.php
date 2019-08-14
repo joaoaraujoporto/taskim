@@ -20,8 +20,6 @@
     <?php
       include 'db_connection.php';
 
-echo "sd";
-
 $conn = openConn();
 
 echo "Connect Successfully";
