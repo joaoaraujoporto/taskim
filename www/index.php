@@ -18,14 +18,14 @@
     <script src="js/jquery-3.4.1.js"></script>
     <script src="js/script.js"></script>
     <?php
-      include 'db_connection.php';
+		include 'db_connection.php';
 
-$conn = openConn();
+		$conn = openConn();
 
-echo "Connect Successfully";
+		echo "Connect Successfully";
 
-closeConn($conn);
-?>
+		closeConn($conn);
+	?>
 
 
   </body>
