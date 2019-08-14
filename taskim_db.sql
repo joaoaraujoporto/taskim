@@ -1,5 +1,14 @@
 CREATE DATABASE taskim_db;
 
+SELECT * FROM user;
+
+INSERT INTO user (name, email, password) VALUES ("joao", "joaov.aporto@gmail.com", "123");
+
+INSERT INTO user (name, email, password) VALUES ("João", "joaov.aporto@exe.com", "$2y$10$Dx16zj50dw56n3GWvVSKRe2pDGp6l4k.vSWmHNNmV2UtBNzG1i4ua");
+
+ALTER TABLE user CHANGE COLUMN email email VARCHAR(50) NOT NULL UNIQUE;
+ALTER TABLE user CHANGE COLUMN password password VARCHAR(100) NOT NULL;
+
 USE taskim_db;
 
 CREATE TABLE user

@@ -1,9 +1,9 @@
 <?php
 
 function openConn() {
-    $dbhost = "localhost";
+    $dbhost = "localhost:3306";
     $dbuser = "root";
-    $dbpass = "admin";
+    $dbpass = "";
     $db = "taskim_db";
 
     $conn = new mysqli($dbhost, $dbuser, $dbpass, $db) or
