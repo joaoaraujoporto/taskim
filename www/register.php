@@ -23,10 +23,6 @@ session_start();
 	<input type="submit" name="register" value="register"></input>
       </form>
     </div>
-                
-    <script src="js/jquery-3.4.1.js"></script>
-    <script src="js/register.js"></script>
-
 <?php
 include 'db_connection.php';
 
@@ -45,11 +41,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $result = mysqli_query($conn, $query);
     $result_grid = mysqli_fetch_array($result);
-
     
     if (mysqli_num_rows($result) != 0) { ?>
         <div id="register-result">E-mail already used. Please, register with another e-mail.</div>
 <?php
+        echo json_encode(['code'=>404]);
     } else {
         $pw_hashed = md5($password);
         
@@ -60,18 +56,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (!$result) { ?>
             <div id="register-result">Problem in server. Please, try again later.</div>
 <?php
+            echo json_encode(['code'=>404]);
         } else { ?>
         <div id="register-result">
         Register done!
             <a href=index.php> Click here to login</a>
         </div>
 <?php
+        echo json_encode(['code'=>200]);
         }
     }
 
     closeConn($conn);
 }
 ?>
+
+    <script src="js/jquery-3.4.1.js"></script>
+    <script src="js/register.js"></script>
 
   </body>
 </html>

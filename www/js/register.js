@@ -21,13 +21,39 @@ function isEmpty(element) {
 }
 
 function onSubmit() {
-    $("form").submit(function() {
-	if (!isEmpty($("[name='name']")))
-	    if (!isEmpty($("[name='email']")))
-		if (isValidEmail($("[name='email']")))
-		    if (!isEmpty($("[name='password']")))
-			return true;
-	return false;
+    $("[type='submit']").click(function(e) {
+	e.preventDefault();
+
+	if (isEmpty($("[name='name']")))
+	    return;
+
+	if (isEmpty($("[name='email']")))
+	    return;
+
+	if (!isValidEmail($("[name='email']")))
+	    return;
+
+	if (isEmpty($("[name='password']")))
+	    return;
+
+	var name = $("[name='name']").val();
+	var email = $("[name='email']").val();
+	var password = $("[name='password']").val();
+			       
+	$.ajax({
+	    type: "POST",
+	    url: "register.php",
+	    dataType: "json",
+	    data: {name:name, email:email, password:password},
+	    success : function(data) {
+		if (data.code == "200") {
+		    $("#header").html("<h2>sii</h2>");
+		} else {
+		    $("#header").html("<h2>rii</h2>");
+		}
+		alert("as");
+	    }
+	});
     });
 }
 

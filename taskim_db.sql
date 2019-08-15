@@ -1,6 +1,9 @@
 CREATE DATABASE taskim_db;
 
 SELECT * FROM user;
+DELETE FROM user;
+
+SET SQL_SAFE_UPDATES = 0;
 
 INSERT INTO user (name, email, password) VALUES ("joao", "joaov.aporto@gmail.com", "123");
 
