@@ -8,6 +8,7 @@ INSERT INTO user (name, email, password) VALUES ("João", "joaov.aporto@exe.com"
 
 ALTER TABLE user CHANGE COLUMN email email VARCHAR(50) NOT NULL UNIQUE;
 ALTER TABLE user CHANGE COLUMN password password VARCHAR(100) NOT NULL;
+ALTER TABLE task CHANGE COLUMN last_play last_play TIMESTAMP NULL DEFAULT NULL;
 
 USE taskim_db;
 
