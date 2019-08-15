@@ -18,13 +18,12 @@ if (!array_key_exists("loggedin", $_SESSION) || !$_SESSION["loggedin"])
     header("location: index.php");
 
 $user = $_SESSION["user"];
-
 ?>
     
     <div id="header"><h1><a href="index.php">Taskim</a></h1></div><br>
     <div id="session-info">
-<?php echo $user->get_name() ?>
-    
+<?php echo $user->get_name() ?><br>
+<a href="logout.php">log out </a>
     </div>
     <div id="task_list">
 		<select multiple>

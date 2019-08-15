@@ -93,7 +93,7 @@ class user {
         $this->tasks = $tasks;
     }
 
-    function get_name() {
+    function get_tasks() {
         return $this->tasks;
     }
 }    

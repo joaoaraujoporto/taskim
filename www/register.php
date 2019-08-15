@@ -46,7 +46,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $result = mysqli_query($conn, $query);
     $result_grid = mysqli_fetch_array($result);
 
-    closeConn($conn);
     
     if (mysqli_num_rows($result) != 0) { ?>
         <div id="register-result">E-mail already used. Please, register with another e-mail.</div>
@@ -69,6 +68,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <?php
         }
     }
+
+    closeConn($conn);
 }
 ?>
 
