@@ -50,8 +50,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     closeConn($conn);
     
     $pw_hashed = $result_grid[3];
+
+    $is_right_pw = md5($password) == $pw_hashed;
     
-    if (mysqli_num_rows($result) == 0 || !password_verify($password, $pw_hashed)) { ?>
+    if (mysqli_num_rows($result) == 0 || !$is_right_pw) { ?>
         <div id="login-error">Invalid e-mail or password</div>
 <?php
     } else {

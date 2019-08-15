@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div id="register-result">E-mail already used. Please, register with another e-mail.</div>
 <?php
     } else {
-        $pw_hashed = password_hash($password, PASSWORD_DEFAULT);
+        $pw_hashed = md5($password);
         
         $query = "INSERT INTO user (name, email, password) VALUES (\"" . $name . "\", \"" . $email . "\", \"" . $pw_hashed . "\");";
 
