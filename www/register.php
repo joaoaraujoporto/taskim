@@ -1,11 +1,17 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html>
   <head>
     <title>Register</title>
+<!-- Bootstrap CSS file -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel='stylesheet' href='css/register.css' type='text/css' />
   </head>
   <body>
-    <div id="header"><h1>Taskim</h1></div><br>
+    <div id="header"><h1><a href="index.php">Taskim</a></h1></div><br>
     <div id="register-fields">
       <form name="register-form" action="register.php" method="post">
     Name<br>
@@ -20,12 +26,17 @@
                 
     <script src="js/jquery-3.4.1.js"></script>
     <script src="js/register.js"></script>
+
 <?php
 include 'db_connection.php';
 
-$conn = openConn();
+if (array_key_exists("loggedin", $_SESSION))
+    if ($_SESSION["loggedin"])
+        header("location: tasks.php");
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $conn = openConn();
+
     $name = $_POST['name'];
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -35,6 +46,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $result = mysqli_query($conn, $query);
     $result_grid = mysqli_fetch_array($result);
 
+    closeConn($conn);
+    
     if (mysqli_num_rows($result) != 0) { ?>
         <div id="register-result">E-mail already used. Please, register with another e-mail.</div>
 <?php
@@ -57,8 +70,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 }
-
-closeConn($conn);
 ?>
 
   </body>

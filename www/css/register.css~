@@ -1,0 +1,4 @@
+#header, #register-fields {
+    margin: auto;
+    width: 15%;
+}

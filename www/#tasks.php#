@@ -19,6 +19,8 @@ if (!array_key_exists("loggedin", $_SESSION) || !$_SESSION["loggedin"])
 
 $user = $_SESSION["user"];
 
+tasks
+
 ?>
     
     <div id="header"><h1><a href="index.php">Taskim</a></h1></div><br>
