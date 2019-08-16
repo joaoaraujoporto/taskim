@@ -30,14 +30,14 @@ session_start();
     <script src="js/index.js"></script>
 <?php
 include 'db_connection.php';
-include 'php/class_lib.php';
+include 'php/userDAO.php';
 
 if (array_key_exists("loggedin", $_SESSION))
     if ($_SESSION["loggedin"])
         header("location: tasks.php");
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $conn = openConn();
+    $conn = open_conn();
     
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -46,8 +46,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $result = mysqli_query($conn, $query);
     $result_grid = mysqli_fetch_array($result);
-
-    closeConn($conn);
     
     $pw_hashed = $result_grid[3];
 
@@ -56,10 +54,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (mysqli_num_rows($result) == 0 || !$is_right_pw) { ?>
         <div id="login-error">Invalid e-mail or password</div>
 <?php
+        close_conn($conn);
     } else {
-        $name = $result_grid[1];
-
-        $_SESSION["user"] = new user($name, $email, $pw_hashed);
+        $id_user = $result_grid[0];
+        
+        $_SESSION["user"] = userDAO::find($conn, $id_user);
+        $_SESSION["conn"] = $conn;
         $_SESSION["loggedin"] = true;
         
         header("location: tasks.php");

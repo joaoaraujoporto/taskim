@@ -1,5 +1,5 @@
  <?php
-include("php/class_lib.php");
+include("php/user.php");
 session_start();
 ?>
 

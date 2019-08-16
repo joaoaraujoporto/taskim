@@ -57,7 +57,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $id = userDAO::next_id($conn);
         $user = new user($id, $name, $email, $pw_hashed, array());
         userDAO::insert($conn, $user);
-        echo $id;
         $result = true; // TODO
 
         if (!$result) { ?>
