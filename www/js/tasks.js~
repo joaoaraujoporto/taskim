@@ -1,0 +1,20 @@
+function onSubmit() {
+    $("form").submit(function() {
+	if (!isEmpty($("[name='email']"))) {
+	    if(isValidEmail($("[name='email']"))) {
+		if (!isEmpty($("[name='password']"))) {
+		    return true;
+		}
+	    }
+	}
+
+	return false;
+    });
+}
+
+$(document).ready(function() {
+    $("[name='new_task']").click(function() {
+	window.location.replace(url);
+    }
+    
+});

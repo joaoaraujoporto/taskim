@@ -41,12 +41,20 @@ class userDAO {
         $stmt->bind_param("si", $password, $id);
         $stmt->execute();
 
-        userDAO::edit_tasks($user->get_tasks(), $user);
+        userDAO::edit_tasks($conn, $user->get_tasks(), $user->get_id());
     }
 
-    static function edit_tasks($tasks, $user) {
-        foreach ($tasks as $task)
-            taskDAO::edit($task);
+    static function edit_tasks($conn, $tasks, $id_user) {
+        foreach ($tasks as $task) {
+            if (taskDAO::find($conn, $task->get_id()) == null) {
+                taskDAO::insert($conn, $task, $id_user);
+                echo "evfp";
+            }
+            else {
+                taskDAO::edit($conn, $task, $id_user);
+                echo "cabd";
+            }
+        }
     }
     
     static function delete($conn, $user) {
@@ -90,7 +98,9 @@ class userDAO {
         $email = $row['email'];
         $password = $row['password'];
         $tasks = taskDAO::list_by_user($conn, $id);
-        echo $id . $name . $email . $password;
+
+        if ($tasks == null)
+            echo "null";
 
         return new user($id, $name, $email, $password, $tasks);
     }
@@ -109,7 +119,7 @@ class userDAO {
         if (mysqli_num_rows($result) == 0)
             throw new NoRowsInTableException();
         
-        return $pw_hashed = $result_grid[0];
+        return $result_grid[0];
     }
 }
 

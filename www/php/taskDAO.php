@@ -1,40 +1,47 @@
 <?php
 
+include_once 'db_connection.php';
 include_once 'task.php';
 include_once 'class_lib.php';
 
 class taskDAO {
-    static function insert($conn, $task, $user) {
-        $id = get_next_id();
-
-        $stmt = $conn->prepare("INSERT INTO task (id_task, id_user, scheduled_time, spent_time, done, name, working, deadline, last_play) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    static function insert($conn, $task, $id_user) {
+        // $conn = open_conn(); TODO - move all open_conn to DAO
+        
+        $stmt = $conn->prepare("INSERT INTO task (id_task, id_user, scheduled_time, spent_time, done, name, working, deadline, last_play) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
         $id = $task->get_id();
         $scheduled_time = $task->get_scheduled_time();
-        $id_user = $user->get_id();
         $spent_time = $task->get_spent_time();
         $done = $task->get_done();
         $name = $task->get_name();
         $working = $task->get_working();
         $deadline = $task->get_deadline();
-        $last_play = $task->get_ĺast_play();
+        $last_play = $task->get_last_play();
             
-        $stmt->bind_param("iiiiisiss", $id, $scheduled_time, $id_user, $spent_time,
+        $stmt->bind_param("iiiiisiss", $id, $id_user, $scheduled_time, $spent_time,
         $done, $name, $working, $deadline, $ĺast_play);
 
         $stmt->execute();
+
+        echo "here";
     }
 
-    static function edit($conn, $task) {
+    static function edit($conn, $task, $id_user) {
+        // $conn = open_conn(); TODO
+
         $id = $task->get_id();
         $scheduled_time = $task->get_scheduled_time();
-        $id_user = $user->get_id();
         $spent_time = $task->get_spent_time();
         $done = $task->get_done();
         $name = $task->get_name();
         $working = $task->get_working();
         $deadline = $task->get_deadline();
-        $last_play = $task->get_ĺast_play();
+        $last_play = $task->get_last_play();
+
+        $stmt = $conn->prepare("UPDATE task SET id_user = ? WHERE id_task = ?");
+        $stmt->bind_param("ii", $scheduled_time, $id);
+        $stmt->execute();
         
         $stmt = $conn->prepare("UPDATE task SET scheduled_time = ? WHERE id_task = ?");
         $stmt->bind_param("ii", $scheduled_time, $id);
@@ -98,7 +105,7 @@ class taskDAO {
         if ($result->num_rows == 0) return $list;
 
         while($row = $result->fetch_assoc())
-            $list[] = get_task($row);
+            $list[] = taskDAO::get_task($row);
 
         return $list;
     }
@@ -126,8 +133,14 @@ class taskDAO {
         $deadline = $row['deadline'];
         $last_play = $row['last_play'];
 
-        return new task($id, $scheduled_time, $spent_time,
-            $done, $name, $working, $deadline, $last_play);
+        $task = new task($id, $scheduled_time, $name, $deadline);
+
+        $task->set_spent_time($spent_time);
+        $task->set_done($done);
+        $task->set_working($working);
+        $task->set_last_play($last_play);
+
+        return $task;
     }
 
     static function next_id($conn) {
@@ -144,7 +157,7 @@ class taskDAO {
         if (mysqli_num_rows($result) == 0)
             throw new NoRowsInTableException();
         
-        return $pw_hashed = $result_grid[1];
+        return $result_grid[0];
     }
 }
 

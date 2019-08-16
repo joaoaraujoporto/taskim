@@ -43,13 +43,17 @@ class user {
         return $this->password;
     }
     
-
     function set_tasks($tasks) {
         $this->tasks = $tasks;
     }
 
     function get_tasks() {
         return $this->tasks;
+    }
+
+    function add_task($task) {
+        //$this->tasks[] = $task;
+        array_push($this->tasks, $task);
     }
 }
 

@@ -25,14 +25,18 @@ class task {
         return $this->id;
     }
     
-    function set_secheduled_time($scheduled_time) {
+    function set_scheduled_time($scheduled_time) {
         $this->scheduled_time = $scheduled_time;
     }
 
-    function get_secheduled_time() {
+    function get_scheduled_time() {
         return $this->scheduled_time;
     }
 
+    function set_spent_time($spent_time) {
+        $this->spent_time = $spent_time;
+    }
+    
     function get_spent_time() {
         return $this->spent_time;
     }
@@ -67,6 +71,10 @@ class task {
 
     function get_deadline() {
         return $this->deadline;
+    }
+
+    function set_last_play($last_play) {
+        $this->last_play = $last_play;
     }
 
     function get_last_play() {

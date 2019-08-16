@@ -1,5 +1,6 @@
  <?php
 include("php/user.php");
+include("php/task.php");
 session_start();
 ?>
 
@@ -26,10 +27,14 @@ $user = $_SESSION["user"];
 <a href="logout.php">log out </a>
     </div>
     <div id="task_list">
-		<select multiple>
-			<option value="task1">task 1</option>
+       	<select multiple>
+<?php foreach($user->get_tasks() as $task) { ?>
+<option value="task1"><? echo $task->get_name() ?></option> <?php } ?>
 		</select>
 	</div>
+    <div id="task_list_action">
+<button type="button" name="new_task">new task</button>
+</div>
 	<div id="task_info">
 		<table style="width:100%">
 		  <tr>
@@ -52,11 +57,11 @@ $user = $_SESSION["user"];
 		</table>
 	</div>
 	<div id="task_action">
-		<button type="button">start</button>
-		<button type="button">done</button>
-		<button type="button">edit</button>
+		<button type="button" name="start_task">start</button>
+		<button type="button" name="done_task">done</button>
+		<button type="button" name="edit_task">edit</button>
 	</div>
     <script src="js/jquery-3.4.1.js"></script>
-    <script src="js/script.js"></script>      
+    <script src="js/tasks.js"></script>      
   </body>
 </html>

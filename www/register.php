@@ -17,7 +17,7 @@ session_start();
     Name<br>
 	<input type="name" name="name"></input><br>
 	E-mail<br>
-	<input type="text" name="email"></input><br>
+	<input type="email" name="email"></input><br>
 	Password<br>
 	<input type="password" name="password"></input><br>
 	<input type="submit" name="register" value="register"></input>
@@ -57,7 +57,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $id = userDAO::next_id($conn);
         $user = new user($id, $name, $email, $pw_hashed, array());
         userDAO::insert($conn, $user);
-        echo $id;
         $result = true; // TODO
 
         if (!$result) { ?>
