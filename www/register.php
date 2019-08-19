@@ -28,9 +28,9 @@ session_start();
     <script src="js/register.js"></script>
 
 <?php
-include 'db_connection.php';
-include 'php/user.php';
-include 'php/userDAO.php';
+include_once 'db_connection.php';
+include_once 'php/user.php';
+include_once 'php/userDAO.php';
 
 if (array_key_exists("loggedin", $_SESSION))
     if ($_SESSION["loggedin"])

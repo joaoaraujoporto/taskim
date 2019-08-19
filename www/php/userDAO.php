@@ -1,7 +1,7 @@
 <?php
 
 include_once 'user.php';
-include 'taskDAO.php';
+include_once 'taskDAO.php';
     
 class userDAO {
     static function insert($conn, $user) {
@@ -41,20 +41,27 @@ class userDAO {
         $stmt->bind_param("si", $password, $id);
         $stmt->execute();
 
-        userDAO::edit_tasks($conn, $user->get_tasks(), $user->get_id());
+        userDAO::edit_tasks($conn, $user->get_tasks(), $user);
     }
 
-    static function edit_tasks($conn, $tasks, $id_user) {
+    static function edit_tasks($conn, $tasks, $user) {
         foreach ($tasks as $task) {
             if (taskDAO::find($conn, $task->get_id()) == null) {
-                taskDAO::insert($conn, $task, $id_user);
-                echo "evfp";
+                taskDAO::insert($conn, $task, $user->get_id());
             }
             else {
-                taskDAO::edit($conn, $task, $id_user);
-                echo "cabd";
+                taskDAO::edit($conn, $task, $user->get_id());
             }
         }
+
+        $tasks_db = taskDAO::list_by_user($conn, $user->get_id());
+
+        foreach ($tasks_db as $task_db) {
+            $task = $user->get_task($task_db->get_id());
+
+            if ($task == null)
+                taskDAO::delete($conn, $task_db);
+        }            
     }
     
     static function delete($conn, $user) {

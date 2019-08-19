@@ -1,5 +1,7 @@
 <?php
 
+include_once 'task.php';
+
 class user {
     var $id;
     var $name;
@@ -54,6 +56,19 @@ class user {
     function add_task($task) {
         //$this->tasks[] = $task;
         array_push($this->tasks, $task);
+    }
+
+    function delete_task($task) {
+        $index_task = array_search($this->tasks, $task);
+        array_splice($this->tasks, $index_task, 1);
+    }
+
+    function get_task($id_task) {
+        foreach ($this->tasks as $task)
+            if ($task->id == $id_task)
+                return $task;
+
+        return null;
     }
 }
 

@@ -1,5 +1,5 @@
 <?php
-include 'php/user.php';
+include_once 'php/user.php';
 session_start();
 ?>
 
@@ -29,8 +29,8 @@ session_start();
     <script src="js/jquery-3.4.1.js"></script>
     <script src="js/new_task.js"></script>
 <?php
-include 'db_connection.php';
-include 'php/taskDAO.php';
+include_once 'db_connection.php';
+include_once 'php/taskDAO.php';
 
 if (!array_key_exists("loggedin", $_SESSION) || !$_SESSION["loggedin"])
     header("location: tasks.php");

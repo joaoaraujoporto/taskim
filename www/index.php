@@ -29,8 +29,8 @@ session_start();
     <script src="js/jquery-3.4.1.js"></script>
     <script src="js/index.js"></script>
 <?php
-include 'db_connection.php';
-include 'php/userDAO.php';
+include_once 'db_connection.php';
+include_once 'php/userDAO.php';
 
 if (array_key_exists("loggedin", $_SESSION))
     if ($_SESSION["loggedin"])

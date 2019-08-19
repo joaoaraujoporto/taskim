@@ -1,6 +1,6 @@
 <?php
-include 'db_connection.php';
-include 'php/userDAO.php';
+include_once 'db_connection.php';
+include_once 'php/userDAO.php';
 
 session_start();
 

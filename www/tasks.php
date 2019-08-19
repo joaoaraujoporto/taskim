@@ -1,12 +1,12 @@
  <?php
-include("php/user.php");
-include("php/task.php");
+include_once 'php/user.php';
+include_once 'php/task.php';
 session_start();
 ?>
 
 <!DOCTYPE html>
 <html>
-  <head>
+  <xbhead>
     <title>Taskim</title>
 <!-- Bootstrap CSS file -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -27,31 +27,32 @@ $user = $_SESSION["user"];
 <a href="logout.php">log out </a>
     </div>
     <div id="task_list">
-       	<select multiple>
+       	<select id="sel_task_list" multiple>
 <?php foreach($user->get_tasks() as $task) { ?>
-<option value="task1"><? echo $task->get_name() ?></option> <?php } ?>
+<option value=<? echo $task->get_id() ?>><? echo $task->get_name() ?></option> <?php } ?>
 		</select>
 	</div>
     <div id="task_list_action">
 <button type="button" name="new_task">new task</button>
+<button type="button" name="delete_task">delete task</button>
 </div>
 	<div id="task_info">
 		<table style="width:100%">
 		  <tr>
 			<td>Scheduled time</td>
-			<td>2</td>
+			<td name="scheduled_time_cell">2</td>
 		  </tr>
 		  <tr>
 			<td>Spent time</td> 
-			<td>1</td> 
+			<td name="spent_time_cell">1</td> 
 		  </tr>
 		  <tr>
 			<td>Done</td>
-			<td>no</td>
+			<td name="done_cell">no</td>
 		  </tr>
 		  <tr>
 			<td>Deadline</td>
-			<td>04/03/2034</td>
+			<td name="deadline_cell">04/03/2034</td>
 		  </tr>
 		  <tr>
 		</table>
