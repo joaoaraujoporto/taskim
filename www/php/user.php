@@ -59,7 +59,7 @@ class user {
     }
 
     function delete_task($task) {
-        $index_task = array_search($this->tasks, $task);
+        $index_task = array_search($task, $this->tasks);
         array_splice($this->tasks, $index_task, 1);
     }
 

@@ -28,8 +28,15 @@ $user = $_SESSION["user"];
     </div>
     <div id="task_list">
        	<select id="sel_task_list" multiple>
-<?php foreach($user->get_tasks() as $task) { ?>
-<option value=<? echo $task->get_id() ?>><? echo $task->get_name() ?></option> <?php } ?>
+<?php
+    function update_list($user) {
+        foreach($user->get_tasks() as $task) { ?>
+             <option value=<? echo $task->get_id() ?>><? echo $task->get_name() ?></option> <?php
+        }
+    }
+
+    update_list($user);
+?>
 		</select>
 	</div>
     <div id="task_list_action">
@@ -63,6 +70,28 @@ $user = $_SESSION["user"];
 		<button type="button" name="edit_task">edit</button>
 	</div>
     <script src="js/jquery-3.4.1.js"></script>
-    <script src="js/tasks.js"></script>      
+    <script src="js/tasks.js"></script>
+
+    <?php
+    
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        var_dump($_POST);
+
+        $user = $_SESSION['user'];
+        $task = $user->get_task($_POST['id_task']);
+
+        update_list($user);
+        
+        echo json_encode(
+            array(
+                'scheduled_time' => $task->get_scheduled_time(),
+                'spent_time' => $task->get_spent_time(),
+                'done_time' => $task->get_done(),
+                'deadline_time' => $task->get_deadline()            
+            )
+        );
+    }
+    ?>
+}
   </body>
 </html>
