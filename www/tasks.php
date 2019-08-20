@@ -81,7 +81,7 @@ $user = $_SESSION["user"];
         $task = $user->get_task($_POST['id_task']);
 
         update_list($user);
-        
+        /*
         echo json_encode(
             array(
                 'scheduled_time' => $task->get_scheduled_time(),
@@ -89,7 +89,14 @@ $user = $_SESSION["user"];
                 'done_time' => $task->get_done(),
                 'deadline_time' => $task->get_deadline()            
             )
-        );
+            );*/
+
+        $data["scheduled_time"] = $task->get_scheduled_time();
+        $data["spent_time"] = $task->get_spent_time();
+        $data["done"] = $task->get_done();
+        $data["deadline"] = $task->get_deadline();
+
+        echo json_encode($data);
     }
     ?>
   </body>

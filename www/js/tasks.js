@@ -43,7 +43,7 @@ $(document).ready(function() {
 		$("[name='spent_time_cell']").html(data.spent_time);
 		$("[name='done_cell']").html(data.done);
 		$("[name='deadline_cell']").html(data.deadline);
-		// alert(data);
+		alert(data);
 	    },
 	    error: function(data) {
 		// alert(data);
