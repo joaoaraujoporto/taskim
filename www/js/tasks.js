@@ -15,10 +15,11 @@ $(document).ready(function() {
 	    url: 'delete_task.php',
 	    data: 'id_task='+id_task,
 	    success: function(data) {
-		alert(data);
+		// alert(data);
+		window.location.replace('tasks.php');
 	    },
 	    error: function() {
-		alert("3");
+		alert("Error: try again later.");
 	    }
 	});
     });
@@ -42,10 +43,10 @@ $(document).ready(function() {
 		$("[name='spent_time_cell']").html(data.spent_time);
 		$("[name='done_cell']").html(data.done);
 		$("[name='deadline_cell']").html(data.deadline);
-		alert(data);
+		// alert(data);
 	    },
 	    error: function(data) {
-		alert(data);
+		// alert(data);
 	    }
 	});	
     });
