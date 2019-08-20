@@ -80,6 +80,18 @@ class task {
     function get_last_play() {
         return $this->last_play;
     }
+
+    function update_work($timestamp) {
+        if (!$this->working) {
+            $this->set_last_play($timestamp);
+        } else {
+            $time_diff = $timestamp - $this->last_play;
+            $spent_time = $this->spent_time + $time_diff;
+            $this->set_spent_time($spent_time);
+        }
+        
+        $this->set_working(!$this->working);
+    }
 }
 
 ?>

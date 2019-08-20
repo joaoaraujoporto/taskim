@@ -9,8 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $data["scheduled_time"] = $task->get_scheduled_time();
     $data["spent_time"] = $task->get_spent_time();
     $data["done"] = $task->get_done();
-    $data["deadline"] = $task->get_deadline();
-    $data["workinh"] = $task->get_working();
+    $data["deadline"] = $task->get_deadline();        
 
     echo json_encode($data);
 }

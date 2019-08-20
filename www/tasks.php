@@ -40,25 +40,26 @@ $user = $_SESSION["user"];
 		<table style="width:100%">
 		  <tr>
 			<td>Scheduled time</td>
-			<td name="scheduled_time_cell">2</td>
+			<td name="scheduled_time_cell">no task selected</td>
 		  </tr>
 		  <tr>
 			<td>Spent time</td> 
-			<td name="spent_time_cell">1</td> 
+			<td name="spent_time_cell">no task selected</td> 
 		  </tr>
 		  <tr>
 			<td>Done</td>
-			<td name="done_cell">no</td>
+			<td name="done_cell">no task selected</td>
 		  </tr>
 		  <tr>
 			<td>Deadline</td>
-			<td name="deadline_cell">04/03/2034</td>
+			<td name="deadline_cell">no task selected</td>
 		  </tr>
 		  <tr>
 		</table>
 	</div>
 	<div id="task_action">
-		<button type="button" name="start_task">start</button>
+
+		<button type="button" name="change_task_work">start</button>
 		<button type="button" name="done_task">done</button>
 		<button type="button" name="edit_task">edit</button>
 	</div>
