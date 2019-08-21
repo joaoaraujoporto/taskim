@@ -19,7 +19,7 @@ session_start();
 	Name<br>
 	<input type="text" name="task_name"></input><br>
 	Scheduled time<br>
-	<input type="text" name="task_scheduled_time"></input><br>
+	<input type="number" name="task_scheduled_time"></input><br>
     Deadline<br>
     <input type="date" name="task_deadline"></input><br>
 	<input type="submit" name="submit" value="CREATE"></input>

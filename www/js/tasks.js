@@ -1,11 +1,13 @@
 function update_task_info(task_data) {
-    $("[name='scheduled_time_cell']").html(data.scheduled_time);
-    $("[name='spent_time_cell']").html(data.spent_time);
-    $("[name='done_cell']").html(data.done.toString());
-    $("[name='deadline_cell']").html(data.deadline);
+    $("[name='scheduled_time_cell']").html(task_data.scheduled_time);
+    $("[name='spent_time_cell']").html(task_data.spent_time);
+    $("[name='done_cell']").html(task_data.done.toString());
+    $("[name='deadline_cell']").html(task_data.deadline);
     
-    if (data.working)
-	$("[name=''change_task_work]").html("stop");
+    if (task_data.working)
+	$("[name='change_task_work']").html("stop");
+    else
+	$("[name='change_task_work']").html("start");
 }
 
 
@@ -50,14 +52,7 @@ $(document).ready(function() {
 	    data: 'id_task='+id_task,
 	    success: function(response) {
 		var data = $.parseJSON(response);
-		
-		$("[name='scheduled_time_cell']").html(data.scheduled_time);
-		$("[name='spent_time_cell']").html(data.spent_time);
-		$("[name='done_cell']").html(data.done.toString());
-		$("[name='deadline_cell']").html(data.deadline);
-
-		if (data.working)
-		    $("[name='change_task_work']").html("stop");
+		update_task_info(data);
 	    },
 	    error: function(response) {
 		alert("Error: Problem in server. Try again later.");
@@ -68,26 +63,16 @@ $(document).ready(function() {
     $("[name='change_task_work']").click(function() {
 	var data = {};
 	
-	data['id_task'] = $("#sel_task_list").val();
-	data['timestamp'] = new Date($.now());
+	data['id_task'] = $("#sel_task_list").val().toString();
+	data['timestamp'] = new Date().getTime();
 	
 	$.ajax({
 	    type: 'post',
 	    url: 'change_task_work.php',
 	    data: data,
 	    success: function(response) {
-		console.log(response);
 		var data = JSON.parse(response);
-		update_task_info(data);
-
-		console.log(response);
-		/*
-		if (data.code == 200)
-		    alert("Task deleted successfully"); // TODO put message in HTML
-		else
-		    alert("Error: try again later"); // logically unreachable
-		    */
-		
+		update_task_info(data);		
 	    },
 	    error: function() {
 		alert("Error: Problem in server. Try again later.");

@@ -38,7 +38,7 @@ class task {
     }
     
     function get_spent_time() {
-        return $this->spent_time;
+        return gmdate("H:i:s", round($this->spent_time/1000));
     }
 
     function set_done($done) {
